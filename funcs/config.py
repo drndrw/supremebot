@@ -1,5 +1,6 @@
 class Parameters():
-    parse_url = 'http://www.supremenewyork.com/shop/new'
+    parse_url = 'http://www.supremenewyork.com/shop/all'
+    base_url = 'http://www.supremenewyork.com'
     cart_url = 'http://www.supremenewyork.com/shop/cart'
     checkout_url = 'https://www.supremenewyork.com/checkout'
 
@@ -7,25 +8,25 @@ class Clothing():
     clothing_types = {'Accessories': {'url': 'accessories', \
                         'parse': True, \
                         'priority': 7, \
-                        'keywords': None}, \
+                        'keywords': ['woodbine','akira','tee','tag']}, \
                       'Bags': {'url': 'bags', \
-                        'parse': True, \
+                        'parse': False, \
                         'priority': 5, \
                         'keywords': None}, \
                       'Hats': {'url': 'hats', \
-                        'parse': True, \
+                        'parse': False, \
                         'priority': 4, \
                         'keywords': None}, \
                       'Jackets': {'url': 'jackets',
-                        'parse': True, \
+                        'parse': False, \
                         'priority': 2, \
                         'keywords': None}, \
                       'Pants': {'url': 'pants',
-                        'parse': True, \
+                        'parse': False, \
                         'priority': 8, \
                         'keywords': None}, \
                       'Shirts': {'url': 'shirts', \
-                        'parse': True, \
+                        'parse': False, \
                         'priority': 0, \
                         'keywords': None}, \
                       'Skate': {'url': 'skate', \
@@ -33,11 +34,16 @@ class Clothing():
                         'priority': 6, \
                         'keywords': None}, \
                       'Sweatshirts': {'url': 'sweatshirts', \
-                        'parse': True, \
+                        'parse': False, \
                         'priority': 3, \
                         'keywords': None}, \
-                      'Tops/ Sweaters': {'url': 'tops_sweaters', \
+                      'Tops/ Sweaters': {'url': 'tops-sweaters', \
                         'parse': True, \
                         'priority': 1, \
                         'keywords': None}}
-    global_keywords = ['nike','akira']
+    global_keywords = ['nike','akira','Independent','wheels','snake','thermal']
+
+class Colors():
+    BOLD = '\033[1m'
+    END = '\033[0m'
+    RED = '\033[91m'
