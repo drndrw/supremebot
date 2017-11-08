@@ -15,6 +15,5 @@ options = ['shirts','acket','accessories']
 # for item in Clothing.clothing_types.items():
 #     print(item[1]['parse'])
 
-print("lets see if this works")
 goodluck = Find(Clothing, Parameters)
 print(goodluck.searches)
