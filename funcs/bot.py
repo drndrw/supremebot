@@ -30,8 +30,9 @@ class Find():
                             self.item_page = bs.BeautifulSoup(self.item_parse,'lxml')
 
                             #Check if sold out (on page)
-                            if self.item_page.find(attrs={'class':'sold-out'}):
-                                print(Colors.RED + "SOLD OUT" + Colors.END)
+                            if self.item_page.find(attrs={'class':'button sold-out'}):
+                                print(Colors.BOLD + self.item_page.title.text[9:] + Colors.END)
+                                print(Colors.RED + "  SOLD OUT" + Colors.END)
                                 continue
 
                             #Search category keywords in title
@@ -71,4 +72,4 @@ class Find():
                             print("  Sizes: " + ', '.join(self.sizes) if self.sizes else 'N/A')
 
                             #Write to output array
-                            self.searches.append({'Category': item[0],'Name': self.item_page.title.text[9:],'Price': self.price if self.price else 0,'URL': link.a.get('href'),'Keywords': int(self.keywords), 'Sizes': self.sizes})
+                            self.searches.append({'Category': item[0],'Name': self.item_page.title.text[9:],'Price': self.price if self.price else 0,'URL': link.a.get('href'),'Keywords': int(self.keywords), 'Sizes': self.sizes,'Priority':item[1]['priority']})

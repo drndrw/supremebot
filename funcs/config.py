@@ -1,5 +1,5 @@
 class Parameters():
-    parse_url = 'http://www.supremenewyork.com/shop/all'
+    parse_url = 'http://www.supremenewyork.com/shop/new'
     base_url = 'http://www.supremenewyork.com'
     cart_url = 'http://www.supremenewyork.com/shop/cart'
     checkout_url = 'https://www.supremenewyork.com/checkout'
