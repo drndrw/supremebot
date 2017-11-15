@@ -7,7 +7,7 @@ import time
 
 class Find():
 
-    def __init__(self, clothing, parameters):
+    def __init__(self, clothing, parameters, terminal_display=True):
         self.parser = urllib.request.urlopen(parameters.parse_url).read()
         self.directory = bs.BeautifulSoup(self.parser,'lxml')
         self.searches = []
@@ -31,8 +31,9 @@ class Find():
 
                             #Check if sold out (on page)
                             if self.item_page.find(attrs={'class':'button sold-out'}):
-                                print(Colors.BOLD + self.item_page.title.text[9:] + Colors.END)
-                                print(Colors.RED + "  SOLD OUT" + Colors.END)
+                                if terminal_display:
+                                    print(Colors.BOLD + self.item_page.title.text[9:] + Colors.END)
+                                    print(Colors.RED + "  SOLD OUT" + Colors.END)
                                 continue
 
                             #Search category keywords in title
@@ -65,11 +66,20 @@ class Find():
                                 self.sizes = None
 
                             #Terminal Display
-                            print(Colors.BOLD + self.item_page.title.text[9:] + Colors.END)
-                            print("  Category: " + item[0])
-                            print("  Price: " + str(self.price))
-                            print("  Keywords: " + str(self.keywords))
-                            print("  Sizes: " + ', '.join(self.sizes) if self.sizes else 'N/A')
+                            if terminal_display:
+                                print(Colors.BOLD + self.item_page.title.text[9:] + Colors.END)
+                                print("  Category: " + item[0])
+                                print("  Price: " + str(self.price))
+                                print("  Keywords: " + str(self.keywords))
+                                print("  Sizes: " + ', '.join(self.sizes) if self.sizes else 'N/A')
 
                             #Write to output array
                             self.searches.append({'Category': item[0],'Name': self.item_page.title.text[9:],'Price': self.price if self.price else 0,'URL': link.a.get('href'),'Keywords': int(self.keywords), 'Sizes': self.sizes,'Priority':item[1]['priority']})
+
+    def prioritize():
+        #Iterate through dictionary (self.searches), using the priority number (in ascending order)
+        for item in self.searches:
+            print
+        #Assign individual priority numbers to each item, starting with the highest number of keyword matches
+        # for item in
+        return None
