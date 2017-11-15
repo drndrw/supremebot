@@ -3,11 +3,10 @@ import bs4 as bs
 import lxml
 import urllib.request
 import re
-import time
 
 class Find():
 
-    def __init__(self, clothing, parameters, terminal_display=True):
+    def __init__(self, clothing, parameters, sort_keywords=True, terminal_display=True):
         self.parser = urllib.request.urlopen(parameters.parse_url).read()
         self.directory = bs.BeautifulSoup(self.parser,'lxml')
         self.searches = []
@@ -76,10 +75,7 @@ class Find():
                             #Write to output array
                             self.searches.append({'Category': item[0],'Name': self.item_page.title.text[9:],'Price': self.price if self.price else 0,'URL': link.a.get('href'),'Keywords': int(self.keywords), 'Sizes': self.sizes,'Priority':item[1]['priority']})
 
-    def prioritize():
-        #Iterate through dictionary (self.searches), using the priority number (in ascending order)
-        for item in self.searches:
-            print
-        #Assign individual priority numbers to each item, starting with the highest number of keyword matches
-        # for item in
-        return None
+                            #Sort array by priority and keywords
+                            if sort_keywords:
+                                self.first_sort = sorted(self.searches, key= lambda x: x['Keywords'], reverse=True)
+                                self.searches = sorted(self.first_sort, key= lambda x: x['Priority'])

@@ -7,7 +7,7 @@ parse_string = '/shop/jackets/koknvfmbr/g91sqo5dv'
 options = ['shirts','acket','accessories']
 
 test = {'priority':3,'not_prioirty':2,'shouldbefirst':1}
-print(sort(test))
+print(sorted(test, key=lambda x: x[1]))
 # for option in options:
 #     if re.search( option, parse_string, re.M|re.I):
 #         print('Matched: ' + option)
@@ -18,4 +18,5 @@ print(sort(test))
 #     print(item[1]['parse'])
 
 goodluck = Find(Clothing, Parameters)
+# print(goodluck.prioritize())
 print(goodluck.searches)

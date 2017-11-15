@@ -42,7 +42,7 @@ class Clothing():
                         'parse': True, \
                         'priority': 1, \
                         'keywords': None}}
-    global_keywords = ['woodbine']
+    global_keywords = ['snake','fuck','black','snake','levi']
     exclude_keywords = ['hanes']
 
 class Exchange():
