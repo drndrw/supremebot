@@ -1,8 +1,11 @@
-from .config import Colors, Exchange
+from .config import Colors, Exchange, Parameters
 import bs4 as bs
 import lxml
 import urllib.request
 import re
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from datetime import datetime
 
 class Find():
 
@@ -79,3 +82,37 @@ class Find():
                             if sort_keywords:
                                 self.first_sort = sorted(self.searches, key= lambda x: x['Keywords'], reverse=True)
                                 self.searches = sorted(self.first_sort, key= lambda x: x['Priority'])
+
+    def buy(self, budget=Parameters.budget, driver=Parameters.driver_location):
+        #Open cart URL
+        cart = webdriver.Chrome(driver)
+        cart.get(Parameters.cart_url)
+        cart_amount = 0
+
+        #Iterate through URLs from self.searches
+        page = webdriver.Chrome(driver)
+        for item in self.searches:
+            #Check if cart amount exceeds 90% of the budget
+            print('Buying ' + item['Name'])
+            if cart_amount > budget - (budget * .1):
+                print('breaking loop')
+                print(cart_amount)
+                break
+            #Check if item exceeds budget with existing cart
+            if cart_amount + item['Price'] > budget:
+                print('Too expensive')
+                print(cart_amount)
+                continue
+            #Add item to cart
+            else:
+                page.get(Parameters.base_url + item['URL'])
+                # buttom = page.find_element_by_class_name('button sold-out'):
+                try:
+                    button = page.find_element_by_xpath("//input[@value='add to cart']")
+                    button.click()
+                    cart_amount += item['Price']
+                except:
+                    print('Cannot buy same style twice')
+                    print(cart_amount)
+                    continue
+            print(cart_amount)

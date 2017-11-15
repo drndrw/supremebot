@@ -18,5 +18,5 @@ print(sorted(test, key=lambda x: x[1]))
 #     print(item[1]['parse'])
 
 goodluck = Find(Clothing, Parameters)
-# print(goodluck.prioritize())
+print(goodluck.buy())
 print(goodluck.searches)

@@ -1,9 +1,14 @@
 class Parameters():
+
+    #Shop URLs
     parse_url = 'http://www.supremenewyork.com/shop/new'
     base_url = 'http://www.supremenewyork.com'
     cart_url = 'http://www.supremenewyork.com/shop/cart'
     checkout_url = 'https://www.supremenewyork.com/checkout'
-    budget = 500
+    budget = 2000
+
+    #Selenium
+    driver_location = '/Users/drndrw/Downloads/chromedriver'
 
 class Clothing():
     clothing_types = {'Accessories': {'url': 'accessories', \
