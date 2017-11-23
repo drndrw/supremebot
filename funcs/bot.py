@@ -3,6 +3,7 @@ import bs4 as bs
 import lxml
 import urllib.request
 import re
+import time
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from datetime import datetime
@@ -84,9 +85,6 @@ class Find():
                                 self.searches = sorted(self.first_sort, key= lambda x: x['Priority'])
 
     def buy(self, budget=Parameters.budget, driver=Parameters.driver_location):
-        #Open cart URL
-        cart = webdriver.Chrome(driver)
-        cart.get(Parameters.cart_url)
         cart_amount = 0
 
         #Iterate through URLs from self.searches
@@ -110,9 +108,54 @@ class Find():
                 try:
                     button = page.find_element_by_xpath("//input[@value='add to cart']")
                     button.click()
+                    print('IN CART')
                     cart_amount += item['Price']
                 except:
                     print('Cannot buy same style twice')
                     print(cart_amount)
                     continue
-            print(cart_amount)
+        #Run checkout procedure
+        #Add condition in case sold out even occurs
+        time.sleep(3)
+        page.get(Parameters.checkout_url)
+        #Full name
+        name = page.find_element_by_xpath("//input[@placeholder='name']")
+        name.send_keys(Parameters.checkout_info['name'])
+        #Email address
+        email = page.find_element_by_xpath("//input[@placeholder='email']")
+        email.send_keys(Parameters.checkout_info['email'])
+        #Telephone number
+        tel = page.find_element_by_xpath("//input[@placeholder='tel']")
+        tel.send_keys(Parameters.checkout_info['tel'])
+        #Shipping address
+        address = page.find_element_by_xpath("//input[@placeholder='address']")
+        address.send_keys(Parameters.checkout_info['address'])
+        #Shipping address apartment
+        apt = page.find_element_by_xpath("//input[@placeholder='apt, unit, etc']")
+        apt.send_keys(Parameters.checkout_info['apt'])
+        #Shipping zip code
+        zipcode = page.find_element_by_xpath("//input[@placeholder='zip']")
+        zipcode.send_keys(Parameters.checkout_info['zip'])
+        #Shipping city
+        city = page.find_element_by_xpath("//input[@placeholder='city']")
+        city.send_keys(Parameters.checkout_info['city'])
+        #Shipping state
+        state = page.find_element_by_xpath("//select[@id='order_billing_state']/option[text()='{}']".format(Parameters.checkout_info['state']))
+        state.click()
+        #Shipping country
+        country = page.find_element_by_xpath("//select[@id='order_billing_country']/option[text()='{}']".format(Parameters.checkout_info['country']))
+        country.click()
+        #Credit card number
+        number = page.find_element_by_xpath("//input[@placeholder='number']")
+        number.send_keys(Parameters.checkout_info['cc_number'])
+        #Credit card expiration month
+        month = page.find_element_by_xpath("//select[@id='credit_card_month']/option[text()='{}']".format(Parameters.checkout_info['cc_month']))
+        month.click()
+        #Credit card expiration year
+        year = page.find_element_by_xpath("//select[@id='credit_card_year']/option[text()='{}']".format(Parameters.checkout_info['cc_year']))
+        year.click()
+        #Credit card CVV
+        cvv = page.find_element_by_xpath("//input[@placeholder='CVV']")
+        cvv.send_keys(Parameters.checkout_info['cc_cvv'])
+        time.sleep(2000)
+        print('Close window')
