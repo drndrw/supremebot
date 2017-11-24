@@ -17,7 +17,7 @@ class Parameters():
         'name': os.getenv('SUPREME_NAME','John Doe'), \
         'email': os.getenv('SUPREME_EMAIL','supreme@supremenyc.com'), \
         'tel': os.getenv('SUPREME_TEL','5551234567'), \
-        'address': os.getenv('SUPREME_EMAIL','1234 Supreme Ct.'), \
+        'address': os.getenv('SUPREME_ADDRESS','1234 Supreme Ct.'), \
         'apt': os.getenv('SUPREME_APT','69'), \
         'zip': os.getenv('SUPREME_ZIP','12345'), \
         'city': os.getenv('SUPREME_CITY','New York City'), \
@@ -43,11 +43,11 @@ class Clothing():
                         'priority': 4, \
                         'keywords': None}, \
                       'Jackets': {'url': 'jackets',
-                        'parse': False, \
+                        'parse': True, \
                         'priority': 2, \
                         'keywords': None}, \
                       'Pants': {'url': 'pants',
-                        'parse': False, \
+                        'parse': True, \
                         'priority': 8, \
                         'keywords': None}, \
                       'Shirts': {'url': 'shirts', \
