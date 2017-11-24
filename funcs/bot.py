@@ -116,7 +116,6 @@ class Find():
                     continue
         #Run checkout procedure
         #Add condition in case sold out even occurs
-        time.sleep(3)
         page.get(Parameters.checkout_url)
         #Full name
         name = page.find_element_by_xpath("//input[@placeholder='name']")
